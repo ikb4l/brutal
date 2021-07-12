@@ -3,13 +3,9 @@
 ASM = nasm
 ASM_FLAGS = -f elf32
 CC = gcc
-CC_FLAGS = 	-Iinclude \
-			-nostdlib \
-			-ffreestanding \
-			-m32
+CC_FLAGS = -Iinclude -nostdlib -ffreestanding -m32
 LD = ld
-LD_FLAGS = 	-T linker.ld \
-			-m elf_i386
+LD_FLAGS = -T linker.ld -m elf_i386
 
 C_SOURCES = $(shell find src/ -type f -name '*.c')
 ASM_SOURCES = $(shell find src/ -type f -name '*.asm')
@@ -37,5 +33,5 @@ clean:
 all: clean $(TARGET)
 
 run:
-	qemu-system-x86_64 -kernel brutal.elf
+	qemu-system-i386 -kernel brutal.elf
 
