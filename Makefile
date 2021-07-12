@@ -3,7 +3,7 @@
 ASM = nasm
 ASM_FLAGS = -f elf32
 CC = gcc
-CC_FLAGS = -Iinclude -nostdlib -ffreestanding -m32
+CC_FLAGS = -Isrc/include -nostdlib -ffreestanding -m32
 LD = ld
 LD_FLAGS = -T linker.ld -m elf_i386
 
