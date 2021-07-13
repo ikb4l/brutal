@@ -5,13 +5,21 @@ ASM_FLAGS = -f elf32
 CC = gcc
 CC_FLAGS = -Isrc/include -nostdlib -ffreestanding -m32
 LD = ld
-LD_FLAGS = -T linker.ld -m elf_i386
+LD_FLAGS = -T scripts/linker.ld -m elf_i386
 
 C_SOURCES = $(shell find src/ -type f -name '*.c')
 ASM_SOURCES = $(shell find src/ -type f -name '*.asm')
 OBJECTS = $(C_SOURCES:.c=.o) $(ASM_SOURCES:.asm=.o)
 
 TARGET = brutal.elf
+IMAGE = brutal.iso
+
+$(IMAGE): $(TARGET)
+	@mkdir -p iso/boot/grub
+	@mv brutal.elf iso/boot
+	@cp scripts/grub.cfg iso/boot/grub
+	@grub-mkrescue -o brutal.iso iso
+	@rm -rf iso
 
 $(TARGET): $(OBJECTS)
 	@echo Link: $(TARGET)
@@ -33,5 +41,5 @@ clean:
 all: clean $(TARGET)
 
 run:
-	qemu-system-i386 -kernel brutal.elf
+	@qemu-system-i386 -cdrom brutal.iso
 
