@@ -40,6 +40,6 @@ clean:
 
 all: clean $(TARGET)
 
-run:
+run: $(IMAGE)
 	@qemu-system-i386 -cdrom brutal.iso
 

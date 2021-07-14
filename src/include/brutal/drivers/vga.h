@@ -27,8 +27,10 @@
   };
 
   struct vga_config_t {
-    enum vga_color_t fore_color;
-    enum vga_color_t back_color;
+    enum vga_color_t fg;
+    enum vga_color_t bg;
+    enum vga_color_t def_fg;
+    enum vga_color_t def_bg;
   };
 
   struct vga_driver_t {
@@ -38,11 +40,20 @@
     struct vga_config_t config;
   };
 
-  void vga_init();
-  uint16 vga_create_entry(const char c);
-  void vga_putch(const char c);
+  // core
+  void vga_init(enum vga_color_t def_fg, enum vga_color_t def_bg);
+  void vga_reset();
+  void vga_clear_buffer();
+  void vga_clear_positions();
+
+  // colors
   void vga_set_fg(enum vga_color_t color);
   void vga_set_bg(enum vga_color_t color);
+  void vga_colors_default();
+
+  // output
+  uint16 vga_create_entry(const char c);
+  void vga_putch(const char c);
 
 #endif
 

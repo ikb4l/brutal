@@ -9,15 +9,14 @@
 
 #include <brutal/drivers/vga.h>
 #include <brutal/types.h>
+#include <brutal/multiboot.h>
 #include <libk/io.h>
 
 #define USE_VGA_TEXT_MODE 1
 
 void panic(const char* c) {
-  vga_set_fg(BRIGHT_RED);
-  puts("BRUTAL PANIC");
-  vga_set_fg(GREY);
-  vga_set_bg(BLACK);
+  vga_reset();
+  print("[ PANIC ] ");
   puts(c);
 
   for(;;) {}
@@ -25,13 +24,13 @@ void panic(const char* c) {
 
 void main(uint32 magic) {
   if(USE_VGA_TEXT_MODE) {
-    vga_init();
+    vga_init(WHITE, BLACK);
   }
 
-  if(magic != 0x2BADB002) {
+  if(magic != MB_BOOTLOADER_MAGIC) {
     panic("Wrong bootloader. Halting.");
   }
-
-  puts("Hello, Brutal!");
+  
+  print("hello world");
 }
 

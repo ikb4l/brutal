@@ -11,10 +11,14 @@
 #include <libk/io.h>
 
 void puts(const char* c) {
+  print(c);
+  vga_putch('\n');
+}
+
+void print(const char* c) {
   while(*c) {
     vga_putch(*c);
     c++;
   }
-  vga_putch('\n');
 }
 
