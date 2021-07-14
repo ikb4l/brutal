@@ -16,6 +16,10 @@ make # This command builds the whole kernel.
 ```
 If you want to run the kernel after building, using QEMU, use the `make run` command.
 
+# Roadmap
+[ ] Use linear graphics mode instead of EGA-standard text mode.
+[ ] Use double-buffering in linear graphics mode driver.
+
 # License
 Brutal licensed under the terms of [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
