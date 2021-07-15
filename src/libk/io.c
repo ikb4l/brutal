@@ -7,17 +7,12 @@
  * Copyright (c) 2021 ikb4l
  */
 
-#include <brutal/drivers/vga.h>
+#include <brutal/drivers/tty/tty.h>
 #include <libk/io.h>
-
-void puts(const char* c) {
-  print(c);
-  vga_putch('\n');
-}
 
 void print(const char* c) {
   while(*c) {
-    vga_putch(*c);
+    tty_putch(*c);
     c++;
   }
 }
