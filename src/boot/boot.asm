@@ -5,22 +5,25 @@
 ;
 ; Copyright (c) 2021 ikb4l
 
-
 [BITS 32]
 [GLOBAL start]
 [EXTERN main]
 
-%define FLAGS 0x00000000
-%define MAGIC 0x1BADB002
+%define MAGIC         0x1BADB002
+%define FLAGS         0x00000007
 
 section .multiboot
   align 4
   dd MAGIC
   dd FLAGS
   dd -(MAGIC + FLAGS)
+  dd 0, 0, 0, 0, 0
+  dd 0
+  dd 0, 0, 0
 
 section .text
   start:
+    push ebx
     push eax
     call main
 
